@@ -14,10 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static com.lzyd.pay.controller.utils.PayUtils.getUTF8XMLString;
 
@@ -97,21 +96,30 @@ public class PayController {
     @RequestMapping("/test2")
     public String test2(HttpServletRequest httpRequest , HttpServletResponse httpResponse ,Integer num) throws IOException {
         if (num == null){
-            System.out.println(0);
+            System.out.println(0 + "," + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             return "别看了";
         }
         if (num == 1){
-            System.out.println(1);
+            System.out.println(1 + "," + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             return "gb老何";
         }
-
         if (num == 520){
-            System.out.println(520);
-            return "笨憨憨,看啥";
+            System.out.println(520 + "," + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            return "看啥";
         }
         return "666";
 
     }
+
+    @RequestMapping("/test3")
+    public String test3(HttpServletRequest httpRequest , HttpServletResponse httpResponse ,Integer num) throws IOException {
+        if (httpRequest.getHeader("x-forwarded-for") == null) {
+            return httpRequest.getRemoteAddr();
+        }
+        return httpRequest.getHeader("x-forwarded-for");
+    }
+
+
 
 
 
