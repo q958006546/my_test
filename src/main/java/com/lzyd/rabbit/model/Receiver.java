@@ -24,11 +24,6 @@ public class Receiver {
         System.out.println("Receiver + " + msg);
         System.out.println("接收成功1");
     }
-    @RabbitHandler
-    @RabbitListener(queues = "immediate_queue_test1")
-    public void immediateProcess2(String msg) {
-        System.out.println("Receiver + " + msg );
-        System.out.println("接收成功2");
-    }
+
 
 }

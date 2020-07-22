@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -22,6 +23,8 @@ import java.util.Map;
 @Service
 @Slf4j
 public class MqProxyServiceImpl implements MqProxyService {
+
+    private static Integer num = 1;
     @Autowired
     RedisUtils redisUtils;
 
@@ -40,8 +43,12 @@ public class MqProxyServiceImpl implements MqProxyService {
 
     @Override
     public Object rabbitMqTest(Map<String, Object> map) {
-        sender.send();
-        log.info("队列发送成功");
-        return null;
+
+        String msg = "message" + new Date() + "====num:" + num;
+        sender.send(msg);
+        log.info("队列发送成功" + num);
+        num += 1;
+
+        return true;
     }
 }

@@ -23,9 +23,8 @@ public class Sender {
     @Autowired
     RabbitTemplate rabbitTemplate;
 
-    public void send() {
-        String msg = "message" + new Date();
-        System.out.println("Sender + " + msg);
+    public void send(String msg) {
+//        System.out.println("Sender + " + msg);
         rabbitTemplate.convertAndSend("immediateExchange","immediate_routing_key_test1",msg);
     }
 
