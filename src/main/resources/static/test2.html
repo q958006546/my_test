@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+
+    </script>
+
+</head>
+
+
+<body>
+    <h1>sssss</h1>
+    <div id="app-6">
+        <button v-on:click=""></button>
+    </div>
+    <div id="app-5">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">点我有惊喜</button>
+    </div>
+<script type="application/javascript">
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            message: 'Hello 666!'
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+    var app6 = new Vue({
+        el: '#app-5',
+        data: {
+
+        }
+    })
+</script>
+</body>
+</html>
