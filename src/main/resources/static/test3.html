@@ -1,0 +1,271 @@
+vue
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table 表格</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/plugins/elementui/index.css">
+    <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- 引入ElementUI样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入ElementUI组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<body>
+<div id="app">
+    <div style=text-align:center>
+        <h1>记事本</h1>
+
+    </div>
+    <div style=text-align:center>
+        <el-input placeholder="标题/内容" v-model="pagination.queryString" style="width: 200px;"
+                  class="filter-item"></el-input>
+        <el-button @click="findAll()" class="dalfBut">查询</el-button>
+        <el-button type="primary" class="butT" @click="handleCreate()">新建</el-button>
+        <el-button><a href="/login.html">退出登录</a></el-button>
+    </div>
+    <div>
+        <template>
+            <el-table :data="tableData" style="width: 100%">
+                <el-table-column label="标题" width="300">
+                    <template slot-scope="scope">
+                        <span>{{ scope.row.title }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        label="内容"
+                        width="300">
+                    <template slot-scope="scope">
+                        <span style="margin-left: 10px">{{ scope.row.content }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        prop="date"
+                        label="创建时间"
+                        width="400">
+                    <template slot-scope="scope">
+                        <span style="margin-left: 10px">{{ scope.row.time }}</span>
+                    </template>
+                </el-table-column>
+
+                <el-table-column label="操作" >
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                type="primary"
+                                @click="handleUpdate(scope.$index, scope.row)">编辑
+                        </el-button>
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="handleDelete(scope.$index, scope.row)">删除
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </template>
+    </div>
+    <div class="pagination-container">
+        <el-pagination
+                class="pagiantion"
+                @current-change="handleCurrentChange"
+                :current-page="pagination.currentPage"
+                :page-size="pagination.pageSize"
+                layout="total, prev, pager, next, jumper"
+                :total="pagination.total">
+        </el-pagination>
+    </div>
+
+    <!-- 新增弹层 -->
+    <div class="add-form">
+        <el-dialog title="新增内容" :visible.sync="dialogFormVisible">
+            <template>
+                <el-tabs v-model="activeName" type="card">
+                    <el-tab-pane label="新增记事本内容" name="first">
+                        <el-form label-position="right" label-width="100px">
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item label="标题">
+                                        <el-input v-model="addData.title"/>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item label="内容">
+                                        <el-input type="textarea" :rows="5" v-model="addData.content"/>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <!-- <el-row>-->
+                            <!-- <el-col :span="12">-->
+                            <!-- <el-form-item label="时间">-->
+                            <!-- <el-date-picker v-model="addData.time" type="date" placeholder="选择日期"></el-date-picker>-->
+                            <!-- </el-form-item>-->
+                            <!-- </el-col>-->
+                            <!-- </el-row>-->
+                        </el-form>
+                    </el-tab-pane>
+                </el-tabs>
+            </template>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取消</el-button>
+                <el-button type="primary" @click="handleAdd()">确定</el-button>
+            </div>
+        </el-dialog>
+    </div>
+
+    <!-- 编辑标签弹层 -->
+    <div class="add-form">
+        <el-dialog title="编辑记事本" :visible.sync="dialogFormVisible4Edit">
+            <template>
+                <el-tabs v-model="activeName" type="card">
+                    <el-tab-pane label="记事本类容" name="first">
+                        <el-form label-position="right" label-width="100px">
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item label="标题">
+                                        <el-input v-model="formData.title"/>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item label="内容">
+                                        <el-input type="textarea" :rows="5" v-model="formData.content"/>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item label="时间">
+                                        <el-date-picker v-model="formData.time" type="date" placeholder="选择日期"></el-date-picker>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                        </el-form>
+                    </el-tab-pane>
+                </el-tabs>
+            </template>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible4Edit = false">取消</el-button>
+                <el-button type="primary" @click="handleEdit()">确定</el-button>
+            </div>
+        </el-dialog>
+    </div>
+</div>
+
+</body>
+<!-- 引入组件库 -->
+<script src="js/vue.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script src="plugins/elementui/index.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            pagination: {//分页相关模型数据
+                currentPage: 1,//当前页码
+                pageSize: 4,//每页显示的记录数
+                total: 0,//总记录数
+                queryString: ''//查询条件
+            },
+            activeName:'first',
+            tableData: [],
+            formData: [],//编辑表单数据
+            addData: {},
+            dialogFormVisible4Edit: false,
+            dialogFormVisible: false,
+
+        },
+        methods: {
+//查询所有
+            findAll(){
+                var _this = this;
+                var params = {
+                    currentPage: this.pagination.currentPage,
+                    pageSize: this.pagination.pageSize,
+                    queryString: this.pagination.queryString
+
+                }
+                axios.post("/no/findTitle1",params).then(function (response) {
+                    _this.pagination.total = response.data.total;
+                    _this.tableData = response.data.rows;
+                }).catch(function (error) {
+
+                })
+            },
+//切换页码
+            handleCurrentChange(currentPage) {
+                this.pagination.currentPage = currentPage;
+                this.findAll();
+            },
+// ES6，对于vue来说，在axios中使用this表示vue对象了
+            handleUpdate(index, row) {
+                var _this = this;
+//console.log(index, row);
+//alert(row.name); // 获取name ，真实场景获取id
+                this.dialogFormVisible4Edit = true;
+//第一步:回显数据
+                axios.get("/no/findById?id="+row.id).then((response)=>{
+                    _this.formData = response.data.data;
+                }).catch((error)=>{
+
+                })
+            },
+            handleEdit(){
+                var _this = this;
+                axios.post("/no/update",this.formData).then((response)=>{
+                    _this.dialogFormVisible4Edit = false;
+                }).catch((error)=>{
+
+                }).finally(()=>{
+                    this.findAll();
+                })
+
+            },
+            handleAdd(){
+                var _this = this;
+                alert("ok");
+                axios.post("/no/add",this.addData).then((response)=>{
+                    _this.dialogFormVisible = false;
+                    _this.addData={};
+                }).catch((error)=>{
+
+                }).finally(()=>{
+                    this.findAll();
+
+                })
+            },
+// 弹出添加窗口
+            handleCreate() {
+                this.dialogFormVisible = true;
+            },
+
+            handleDelete(index, row) {
+//console.log(index, row);
+//alert(row.id);
+                var _this = this;
+                console.log(_this);
+                axios.get("/no/delete?id="+row.id).then(function (response) {
+//_this.tableData = response.data;
+                    _this.findAll();
+                }).catch(function (error) {
+
+                })
+            }
+        },
+        created:function(){
+            this.findAll();
+        }
+    })
+</script>
+</html>

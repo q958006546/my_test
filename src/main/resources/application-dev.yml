@@ -1,5 +1,5 @@
 server:
-  port: 8199
+  port: 8195
   tomcat:
     uri-encoding: utf-8
 
@@ -66,6 +66,12 @@ spring:
     username: syt
     password: syt
 
+  data:
+    elasticsearch:
+      cluster-name: my-application
+      repositories:
+        enabled: true
+      cluster-nodes: 127.0.0.1:9300
 
 
 
