@@ -1,14 +1,9 @@
 package com.lzyd.es.controller;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lzyd.common.model.Result;
 import com.lzyd.common.model.StatusCode;
-import com.lzyd.es.model.UserChapterFive;
-import io.lettuce.core.dynamic.annotation.Param;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
-import org.apache.catalina.User;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.RequestLine;
@@ -19,7 +14,6 @@ import org.elasticsearch.client.ResponseListener;
 import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -101,12 +95,12 @@ public class UserChapterFiveController {
 //        restClient.performRequestAsync(request,);
         return new Result(true,StatusCode.OK, "异步请求中", null);
     }
-    
+
     /**
     * @Author: 根据ID查询
     * @Description:
     * @Date: 2020/8/17  17:42
-    * @Param null: 
+    * @Param null:
             * @return: null
     **/
     @PostMapping("/book/getById/{id}")

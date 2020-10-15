@@ -66,13 +66,18 @@ spring:
     username: syt
     password: syt
 
-  data:
-    elasticsearch:
-      cluster-name: my-application
-      repositories:
-        enabled: true
-      cluster-nodes: 127.0.0.1:9300
+#elasticsearch 配置：
+elasticsearch:
+  address: 127.0.0.1:9200  #如果是集群，用逗号隔开
+  connect-timeout: 1000   #连接超时时间
+  socket-timeout: 30000   #连接超时时间
+  connection-request-timeout: 500
+  max-connect-num: 100
+  max-connect-per-route: 100
 
-
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
 
 
