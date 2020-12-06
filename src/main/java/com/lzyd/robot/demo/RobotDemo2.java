@@ -6,10 +6,13 @@ import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
@@ -26,20 +29,29 @@ import java.util.Date;
 @RequestMapping("/robot/")
 public class RobotDemo2 {
     static RobotUtils robotUtils = new RobotUtils();
-    //打开酷狗
-    public static void method1(String[] args) throws AWTException, IOException {
+    //刷tb
+    public static void main(String[] args) throws AWTException, IOException {
         Robot robot = robotUtils.getRobot();
         robot.delay(3000);
-        robotUtils.setMouseMove(1497,1057);
+        robotUtils.setMouseMove(557,1072);
         robotUtils.mouseMoveClick(InputEvent.BUTTON1_MASK);
-        robotUtils.setMouseMove(770,156);
+        robotUtils.setMouseMove(330,64);
         robotUtils.mouseMoveClick(InputEvent.BUTTON1_MASK);
-        robotUtils.keyClick(KeyEvent.VK_X);
-        robot.delay(1000);
-        robotUtils.keyClick(KeyEvent.VK_SPACE);
-        robot.delay(1000);
-        robotUtils.setMouseMove(1417,155);
-        robotUtils.mouseMoveClick(InputEvent.BUTTON1_MASK);
+        robot.delay(500);
+//        robot.keyE
+
+
+//        String bfImageFromPath = "C:\\Users\\sun\\Desktop\\娱乐\\image.jpg";
+//        File outputfile = new File(bfImageFromPath);
+//        BufferedImage fullScreenShot = robotUtils.getFullScreenShot();
+//        ImageIO.write(fullScreenShot, "jpg", outputfile);
+
+//        robotUtils.keyClick(KeyEvent.VK_X);
+//        robot.delay(1000);
+//        robotUtils.keyClick(KeyEvent.VK_SPACE);
+//        robot.delay(1000);
+//        robotUtils.setMouseMove(1417,155);
+//        robotUtils.mouseMoveClick(InputEvent.BUTTON1_MASK);
     }
     //发微信
     @GetMapping("/test")
