@@ -1,17 +1,18 @@
 server:
-  port: 8195
+  port: 7099
   tomcat:
     uri-encoding: utf-8
 
 spring:
   servlet:
     multipart:
-      max-file-size: 1024
-      max-request-size: 1024
+      max-file-size: 10240
+      max-request-size: 10240
+
 
 
   datasource:
-    url: jdbc:mysql://localhost:3306/sb1?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
@@ -60,24 +61,28 @@ spring:
     port: 6379
     timeout: 1000
 
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: syt
-    password: syt
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: syt
+#    password: syt
 
 #elasticsearch 配置：
-elasticsearch:
-  address: 127.0.0.1:9200  #如果是集群，用逗号隔开
-  connect-timeout: 1000   #连接超时时间
-  socket-timeout: 30000   #连接超时时间
-  connection-request-timeout: 500
-  max-connect-num: 100
-  max-connect-per-route: 100
+#elasticsearch:
+#  address: 127.0.0.1:9200  #如果是集群，用逗号隔开
+#  connect-timeout: 1000   #连接超时时间
+#  socket-timeout: 30000   #连接超时时间
+#  connection-request-timeout: 500
+#  max-connect-num: 100
+#  max-connect-per-route: 100
 
   mvc:
     view:
       prefix: /
       suffix: .html
+
+mybatis:
+  config-location: classpath:mapper/mybatis-config.xml
+  mapper-locations: classpath*:mapper/**/**Mapper.xml
 
 

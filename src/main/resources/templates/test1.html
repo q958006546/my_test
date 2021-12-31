@@ -1,48 +1,93 @@
-<p>
-    <br /></p>
-<section style="color: rgb(51, 51, 51);font-family: mp-quote, -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;text-align: justify;white-space: normal;">
-    <section style="width: 638px;text-align: left;">
-        <section style="display: flex;justify-content: space-between;">
-            <section style="flex: 1 1 0%;">
-                <section style="padding: 1em;font-size: 14px;text-align: justify;line-height: 1.3em;color: rgb(63, 62, 63);">
-                    <p style="color: rgb(51, 51, 51);font-family: mp-quote, -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;text-align: justify;white-space: normal;">
-                        <strong style="color: rgb(63, 62, 63);font-size: 16px;">长按二维码3秒即可联系</strong>
-                        <br /></p>
-                    <p style="color: rgb(51, 51, 51);font-family: mp-quote, -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;text-align: justify;white-space: normal;">
-                        <br /></p>
-                    <p style="color: rgb(51, 51, 51);font-family: mp-quote, -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;text-align: justify;white-space: normal;">
-                        <strong style="color: rgb(63, 62, 63);font-size: 17px;">
-                            <br /></strong>
-                    </p>
-                    <p>
-                        <strong style="font-size: 17px;">添加助力微信</strong>
-                        <br /></p>
-                    <p>
-                        <br /></p>
-                    <p>
-                        <br /></p>
-                    <p>
-                        <strong style="font-size: 17px;">所有资料，加完即得!</strong></p>
-                </section>
-            </section>
-            <p>
-                <img class="rich_pages" data-ratio="0.6666666666666666" data-s="300,640" data-type="jpeg" data-w="258" data-src="${service_qrCode}" style="width: 160px;height: auto;float: right;max-width: 100% !important;" /></p>
-        </section>
-    </section>
-</section>
-<p>
-    <br /></p>
-<p style="color: rgb(51, 51, 51);font-family: mp-quote, -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;text-align: justify;white-space: normal;">
-    <br /></p>
-<p style="color: rgb(51, 51, 51);font-family: mp-quote, -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;text-align: justify;white-space: normal;">
-  <span style="font-size: 20px;">
-    <strong style="text-align: center;font-size: 18px;">&nbsp;&nbsp;</strong></span>
-</p>
-<p>
-  <span style="font-size: 20px;">
-    <strong style="text-align: center;font-size: 18px;">
-      <br /></strong>
-  </span>
-</p>
-<p>
-    <br /></p>
+<!--
+ * @Autor: 徐小禹
+ * @email: xxy_web@163.com
+ * @Date: 2021-08-28 18:12:15
+-->
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<head>
+    <title>抽奖</title>
+</head>
+<style>
+    table,
+    table tr td {
+        border: 1px solid #ccc;
+    }
+
+    table tr td {
+        padding: 5px 10px;
+    }
+    #btnAjax{
+        width: 135px;
+        height: 35px;
+        display: block;
+        margin: 50px auto;
+    }
+    #resText{
+        width: 135px;
+
+        display: block;
+        margin: 50px auto;
+    }
+    #text{
+        width: 200px;
+        display: block;
+        margin: 50px auto;
+    }
+    #tab{
+        width: 200px;
+        display: block;
+        margin: 50px auto;
+    }
+</style>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<body>
+<div>
+    <table bgcolor="#F0F8FF" id="tab">
+        <tr>
+            <td>诚信</td>
+            <td>友善</td>
+            <td>和平</td>
+            <td>社会</td>
+        </tr>
+    </table>
+    <input id="btnAjax" type="button" value="别点" width="200" height="500">
+    <div class="resText" id="resText">
+        <h6> </h6>
+    </div>
+
+</div>
+<hr>
+<div>
+    <input id="text" type="text" value="0">
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+    $("#btnAjax").click(function () {
+        htmlobj = $.ajax({
+            type: "Get",
+            url: "http://rgfyyy.natappfree.cc/userProduct/test4/1",
+            dataType: "text",
+            success: function (data) {
+
+                var html = `<div className="resText"><h6>${data}</h6></div>`;
+                $("#resText").html(html);
+            },
+            error: function (data) {
+                // 请求失败函数
+                alert(2);
+            }
+        })
+    })
+</script>
+
+</html>

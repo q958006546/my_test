@@ -13,8 +13,8 @@ import com.lzyd.annotation.interfaceAnnotation.CronScheduled;
  */
 public interface AnnotationText {
 //    @CronScheduled(cron = "0 0/1 * * *",desc = "说明")
-    public static void main(String[] args) {
-
-    }
+//    public static void main(String[] args) {
+//
+//    }
 
 }

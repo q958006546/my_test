@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 
-@Configuration
+//@Configuration
 public class ElasticsearchConfig {
 
     @Value("${elasticsearch.address}")

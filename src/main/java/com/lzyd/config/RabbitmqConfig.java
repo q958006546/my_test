@@ -18,7 +18,7 @@ import java.util.Map;
  */
 
 
-@Configuration
+//@Configuration
 public class RabbitmqConfig {
 
 
