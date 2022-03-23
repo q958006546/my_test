@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+</body>
+<script>
+    (function(){
+        var e = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", r = {
+            rotl: function (t, e) {
+                return t << e | t >>> 32 - e
+            }, rotr: function (t, e) {
+                return t << 32 - e | t >>> e
+            }, endian: function (t) {
+                if (t.constructor == Number) return 16711935 & r.rotl(t, 8) | 4278255360 & r.rotl(t, 24);
+                for (var e = 0; e < t.length; e++) t[e] = r.endian(t[e]);
+                return t
+            }, randomBytes: function (t) {
+                for (var e = []; t > 0; t--) e.push(Math.floor(256 * Math.random()));
+                return e
+            }, bytesToWords: function (t) {
+                for (var e = [], r = 0, a = 0; r < t.length; r++, a += 8) e[a >>> 5] |= t[r] << 24 - a % 32;
+                return e
+            }, wordsToBytes: function (t) {
+                for (var e = [], r = 0; r < 32 * t.length; r += 8) e.push(t[r >>> 5] >>> 24 - r % 32 & 255);
+                return e
+            }, bytesToHex: function (t) {
+                for (var e = [], r = 0; r < t.length; r++) e.push((t[r] >>> 4).toString(16)), e.push((15 & t[r]).toString(16));
+                return e.join("")
+            }, hexToBytes: function (t) {
+                for (var e = [], r = 0; r < t.length; r += 2) e.push(parseInt(t.substr(r, 2), 16));
+                return e
+            }, bytesToBase64: function (t) {
+                for (var r = [], a = 0; a < t.length; a += 3) for (var n = t[a] << 16 | t[a + 1] << 8 | t[a + 2], i = 0; i < 4; i++) 8 * a + 6 * i <= 8 * t.length ? r.push(e.charAt(n >>> 6 * (3 - i) & 63)) : r.push("=");
+                return r.join("")
+            }, base64ToBytes: function (t) {
+                t = t.replace(/[^A-Z0-9+\/]/gi, "");
+                for (var r = [], a = 0, n = 0; a < t.length; n = ++a % 4) 0 != n && r.push((e.indexOf(t.charAt(a - 1)) & Math.pow(2, -2 * n + 8) - 1) << 2 * n | e.indexOf(t.charAt(a)) >>> 6 - 2 * n);
+                return r
+            }
+        };
+        console.log(r)
+    }());
+
+</script>
+</html>
